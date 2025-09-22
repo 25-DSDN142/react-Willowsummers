@@ -14,6 +14,10 @@ function drawInteraction(faces, hands) {
       drawPoints(face)
     }
 
+
+
+
+
     /*
     Once this program has a face, it knows some things about it.
     This includes how to draw a box around the face, and an oval. 
@@ -64,26 +68,38 @@ function drawInteraction(faces, hands) {
     /*
     Start drawing on the face here
     */
-    noStroke()
-    fill(225, 225, 0);
+   // noStroke()
+    //fill(225, 225, 0);
     // fill(get(leftEyeCenterX, leftEyeCenterY))
 
-    ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight);
+   // ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth, leftEyeHeight);
 
-    drawPoints(face.leftEye);
-    drawPoints(face.leftEyebrow);
-    drawPoints(face.lips);
-    drawPoints(face.rightEye);
-    drawPoints(face.rightEyebrow);
-
-    // drawX(rightEyeCenterX,rightEyeCenterY);
-    // drawX(leftEyeCenterX,leftEyeCenterY);
+   // drawPoints(face.leftEye);
+//drawPoints(face.leftEyebrow);
+    //drawPoints(face.lips);
+   // drawPoints(face.rightEye);
+//drawPoints(face.rightEyebrow);
 
 
-    // drawX(noseTipX,noseTipY); 
+drawFlower(face.leftEye.centerX, face.leftEye.centerY, )
 
-    // drawX(face.keypoints[332].x,face.keypoints[332].y);
-    // drawX(face.keypoints[103].x,face.keypoints[103].y);
+drawFlower(face.rightEye.centerX, face.rightEye.centerY, 30)
+
+
+
+   // drawX(rightEyeCenterX,rightEyeCenterY);
+   // drawX(leftEyeCenterX,leftEyeCenterY);
+
+
+     drawX(noseTipX,noseTipY); 
+
+drawX(face.keypoints[332].x,face.keypoints[332].y);
+drawX(face.keypoints[103].x,face.keypoints[103].y);
+
+fill(255, 0, 0)
+circle(face.keypoints[4].x, face.keypoints[4].y, 30)
+
+drawFlower(face.keypoints[152].x,face.keypoints[152].y);
 
 
     /*
@@ -98,11 +114,31 @@ function drawInteraction(faces, hands) {
 function drawX(X, Y) {
   push()
 
+  stroke(255)
   strokeWeight(15)
   line(X - 20, Y - 20, X + 20, Y + 20)
   line(X - 20, Y + 20, X + 20, Y - 20)
 
   pop()
+}
+
+function drawFlower(X, Y) {
+  push();
+
+  // petals
+  fill('#FFB6C1'); // pink
+  noStroke();
+  ellipse(X - 20, Y, 30, 30);  // left petal
+  ellipse(X + 20, Y, 30, 30);  // right petal
+  ellipse(X, Y - 20, 30, 30);  // top petal
+  ellipse(X, Y + 20, 30, 30);  // bottom petal
+
+
+  // center
+  fill('#FFD700'); // yellow
+  ellipse(X, Y, 35, 35);
+
+  pop();
 }
 
 

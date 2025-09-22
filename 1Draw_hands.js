@@ -14,20 +14,118 @@ function drawInteraction(faces, hands) {
       drawConnections(hand)
     }
 
-    // This is how to load in the x and y of a point on the hand.
-    let indexFingerTipX = hand.index_finger_tip.x;
-    let indexFingerTipY = hand.index_finger_tip.y;
+let handedness = hand.handedness; // "Left" or "Right"
+// Wrist
+let wristX = hand.wrist.x;
+let wristY = hand.wrist.y;
+let wristZ = hand.wrist.z3D;
 
-    //  let pinkyFingerTipX = hand.pinky_finger_tip.x;
-    //  let pinkyFingerTipY = hand.pinky_finger_tip.y;
+// Thumb
+let thumbCmcX = hand.thumb_cmc.x;
+let thumbCmcY = hand.thumb_cmc.y;
+let thumbCmcZ = hand.thumb_cmc.z3D;
+
+let thumbMcpX = hand.thumb_mcp.x;
+let thumbMcpY = hand.thumb_mcp.y;
+let thumbMcpZ = hand.thumb_mcp.z3D;
+
+let thumbIpX = hand.thumb_ip.x;
+let thumbIpY = hand.thumb_ip.y;
+let thumbIpZ = hand.thumb_ip.z3D;
+
+let thumbTipX = hand.thumb_tip.x;
+let thumbTipY = hand.thumb_tip.y;
+let thumbTipZ = hand.thumb_tip.z3D;
+
+// Index finger
+let indexFingerMcpX = hand.index_finger_mcp.x;
+let indexFingerMcpY = hand.index_finger_mcp.y;
+let indexFingerMcpZ = hand.index_finger_mcp.z3D;
+
+let indexFingerPipX = hand.index_finger_pip.x;
+let indexFingerPipY = hand.index_finger_pip.y;
+let indexFingerPipZ = hand.index_finger_pip.z3D;
+
+let indexFingerDipX = hand.index_finger_dip.x;
+let indexFingerDipY = hand.index_finger_dip.y;
+let indexFingerDipZ = hand.index_finger_dip.z3D;
+
+let indexFingerTipX = hand.index_finger_tip.x;
+let indexFingerTipY = hand.index_finger_tip.y;
+let indexFingerTipZ = hand.index_finger_tip.z3D;
+
+// Middle finger
+let middleFingerMcpX = hand.middle_finger_mcp.x;
+let middleFingerMcpY = hand.middle_finger_mcp.y;
+let middleFingerMcpZ = hand.middle_finger_mcp.z3D;
+
+let middleFingerPipX = hand.middle_finger_pip.x;
+let middleFingerPipY = hand.middle_finger_pip.y;
+let middleFingerPipZ = hand.middle_finger_pip.z3D;
+
+let middleFingerDipX = hand.middle_finger_dip.x;
+let middleFingerDipY = hand.middle_finger_dip.y;
+let middleFingerDipZ = hand.middle_finger_dip.z3D;
+
+let middleFingerTipX = hand.middle_finger_tip.x;
+let middleFingerTipY = hand.middle_finger_tip.y;
+let middleFingerTipZ = hand.middle_finger_tip.z3D;
+
+// Ring finger
+let ringFingerMcpX = hand.ring_finger_mcp.x;
+let ringFingerMcpY = hand.ring_finger_mcp.y;
+let ringFingerMcpZ = hand.ring_finger_mcp.z3D;
+
+let ringFingerPipX = hand.ring_finger_pip.x;
+let ringFingerPipY = hand.ring_finger_pip.y;
+let ringFingerPipZ = hand.ring_finger_pip.z3D;
+
+let ringFingerDipX = hand.ring_finger_dip.x;
+let ringFingerDipY = hand.ring_finger_dip.y;
+let ringFingerDipZ = hand.ring_finger_dip.z3D;
+
+let ringFingerTipX = hand.ring_finger_tip.x;
+let ringFingerTipY = hand.ring_finger_tip.y;
+let ringFingerTipZ = hand.ring_finger_tip.z3D;
+
+// Pinky finger
+let pinkyFingerMcpX = hand.pinky_finger_mcp.x;
+let pinkyFingerMcpY = hand.pinky_finger_mcp.y;
+let pinkyFingerMcpZ = hand.pinky_finger_mcp.z3D;
+
+let pinkyFingerPipX = hand.pinky_finger_pip.x;
+let pinkyFingerPipY = hand.pinky_finger_pip.y;
+let pinkyFingerPipZ = hand.pinky_finger_pip.z3D;
+
+let pinkyFingerDipX = hand.pinky_finger_dip.x;
+let pinkyFingerDipY = hand.pinky_finger_dip.y;
+let pinkyFingerDipZ = hand.pinky_finger_dip.z3D;
+
+let pinkyFingerTipX = hand.pinky_finger_tip.x;
+let pinkyFingerTipY = hand.pinky_finger_tip.y;
+let pinkyFingerTipZ = hand.pinky_finger_tip.z3D;
+
+
+
+
+
+
+
+
+
 
     /*
     Start drawing on the hands here
     */
 
     fill(225, 225, 0);
-    ellipse(indexFingerTipX, indexFingerTipY, 30, 30);
+    //ellipse(indexFingerTipX, indexFingerTipY, 30, 30);
 
+    drawFlower(pinkyFingerTipX, pinkyFingerTipY )
+drawFlower(ringFingerTipX, ringFingerTipY )
+drawFlower(middleFingerTipX, middleFingerTipY)
+drawFlower(indexFingerTipX, indexFingerTipY)
+drawFlower(thumbTipX, thumbTipY)
     // drawPoints(hand)
 
     //fingerPuppet(indexFingerTipX, indexFingerTipY);
@@ -56,6 +154,29 @@ function fingerPuppet(x, y) {
   ellipse(x, y, 20) // draw center 
 
 }
+
+function drawFlower(X, Y) {
+  push();
+
+  // petals
+  fill('#FFB6C1'); // pink
+  noStroke();
+  ellipse(X - 20, Y, 30, 30);  // left petal
+  ellipse(X + 20, Y, 30, 30);  // right petal
+  ellipse(X, Y - 20, 30, 30);  // top petal
+  ellipse(X, Y + 20, 30, 30);  // bottom petal
+
+
+  // center
+  fill('#FFD700'); // yellow
+  ellipse(X, Y, 35, 35);
+
+  pop();
+}
+
+
+
+
 
 
 function pinchCircle(hand) { // adapted from https://editor.p5js.org/ml5/sketches/DNbSiIYKB
