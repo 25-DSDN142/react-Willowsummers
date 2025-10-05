@@ -3,7 +3,7 @@
 function prepareInteraction() {
   //bgImage = loadImage('/images/background.png');
 }
-
+let isMouthOpen = false;
 function drawInteraction(faces, hands) {
 
   // for loop to capture if there is more than one face on the screen. This applies the same process to all faces. 
@@ -14,21 +14,11 @@ function drawInteraction(faces, hands) {
       drawPoints(face)
     }
 
-
-
-
-
-    /*
-    Once this program has a face, it knows some things about it.
-    This includes how to draw a box around the face, and an oval. 
-    It also knows where the key points of the following parts are:
-     face.leftEye
-     face.leftEyebrow
-     face.lips
-     face.rightEye
-     face.rightEyebrow
-    */
-    // Here are some variables you may like to use. 
+   // checkIfMouthOpen(face);
+ //   if (isMouthOpen) {
+  //    text("blah blah", face.keypoints[287].x, face.keypoints[287].y)
+  //  }
+  
     // Face basics
     let faceCenterX = face.faceOval.centerX;
     let faceCenterY = face.faceOval.centerY;
@@ -44,19 +34,16 @@ function drawInteraction(faces, hands) {
     let leftEyebrowCenterY = face.leftEyebrow.centerY;
     let leftEyebrowWidth = face.leftEyebrow.width;
     let leftEyebrowHeight = face.leftEyebrow.height;
-
     // Lips
     let lipsCenterX = face.lips.centerX;
     let lipsCenterY = face.lips.centerY;
     let lipsWidth = face.lips.width;
     let lipsHeight = face.lips.height;
-
     // Right eye
     let rightEyeCenterX = face.rightEye.centerX;
     let rightEyeCenterY = face.rightEye.centerY;
     let rightEyeWidth = face.rightEye.width;
     let rightEyeHeight = face.rightEye.height;
-
     // Right eyebrow
     let rightEyebrowCenterX = face.rightEyebrow.centerX;
     let rightEyebrowCenterY = face.rightEyebrow.centerY;
@@ -90,22 +77,24 @@ drawFlower(face.rightEye.centerX, face.rightEye.centerY, 30)
    // drawX(rightEyeCenterX,rightEyeCenterY);
    // drawX(leftEyeCenterX,leftEyeCenterY);
 
+// drawX(noseTipX,noseTipY); 
+//drawX(face.keypoints[332].x,face.keypoints[332].y);
+//drawX(face.keypoints[103].x,face.keypoints[103].y);
+//fill(255, 0, 0)
+//circle(face.keypoints[4].x, face.keypoints[4].y, 30)
+//drawFlower(face.keypoints[152].x,face.keypoints[152].y);
 
-     drawX(noseTipX,noseTipY); 
+drawMoonFace()
 
-drawX(face.keypoints[332].x,face.keypoints[332].y);
-drawX(face.keypoints[103].x,face.keypoints[103].y);
 
-fill(255, 0, 0)
-circle(face.keypoints[4].x, face.keypoints[4].y, 30)
 
-drawFlower(face.keypoints[152].x,face.keypoints[152].y);
+
+
 
 
     /*
     Stop drawing on the face here
     */
-
   }
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
@@ -154,4 +143,40 @@ function drawPoints(feature) {
   }
   pop()
 
+}
+
+function drawMoonFace(face) {
+  // Base moon (ellipse around the face oval)
+  fill(220);
+  ellipse(faceCenterX, faceCenterY, faceWidth * 1.2, faceheight * 1.2);
+
+  // Shading (simple overlay offset to one side)
+  fill(180, 180, 190, 60);
+  ellipse(faceCenterX - faceWidth * 0.1, faceCenterY - faceheight * 0.05, faceWidth, faceheight);
+
+  // Left eye
+  fill(255); // white of the eye
+  ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth * 1.2, leftEyeHeight * 1.2);
+  fill(80); // pupil
+  ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth * 0.4, leftEyeHeight * 0.4);
+
+  // Right eye
+  fill(255);
+  ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth * 1.2, rightEyeHeight * 1.2);
+  fill(80);
+  ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth * 0.4, rightEyeHeight * 0.4);
+
+  // Eyebrows (soft arcs above the eye centers)
+  stroke(120);
+  strokeWeight(2);
+  noFill();
+  arc(leftEyebrowCenterX, leftEyebrowCenterY, leftEyebrowWidth, leftEyebrowHeight, PI, TWO_PI);
+  arc(rightEyebrowCenterX, rightEyebrowCenterY, rightEyebrowWidth, rightEyebrowHeight, PI, TWO_PI);
+  noStroke();
+
+  // Mouth (simple crater-style smile)
+  fill(150);
+  ellipse(lipsCenterX, lipsCenterY, lipsWidth, lipsHeight * 0.6);
+  fill(100, 100, 100, 120);
+  ellipse(lipsCenterX, lipsCenterY + lipsHeight * 0.1, lipsWidth * 0.6, lipsHeight * 0.4);
 }
