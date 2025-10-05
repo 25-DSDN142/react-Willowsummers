@@ -14,10 +14,7 @@ function drawInteraction(faces, hands) {
       drawPoints(face)
     }
 
-   // checkIfMouthOpen(face);
- //   if (isMouthOpen) {
-  //    text("blah blah", face.keypoints[287].x, face.keypoints[287].y)
-  //  }
+
   
     // Face basics
     let faceCenterX = face.faceOval.centerX;
@@ -86,8 +83,12 @@ drawFlower(face.rightEye.centerX, face.rightEye.centerY, 30)
 
 drawMoonFace()
 
+drawSunFace()
 
-
+   // checkIfMouthOpen(face);
+ //   if (isMouthOpen) {
+  //    text("blah blah", face.keypoints[287].x, face.keypoints[287].y)
+  //  }
 
 
 
@@ -179,4 +180,41 @@ function drawMoonFace(face) {
   ellipse(lipsCenterX, lipsCenterY, lipsWidth, lipsHeight * 0.6);
   fill(100, 100, 100, 120);
   ellipse(lipsCenterX, lipsCenterY + lipsHeight * 0.1, lipsWidth * 0.6, lipsHeight * 0.4);
+}
+
+function drawSunFace(face) {
+ 
+  // Sun body
+  fill(255, 215, 0);
+  ellipse(faceCenterX, faceCenterY, faceWidth * 1.3, faceHeight * 1.3);
+
+  // Rays
+  for (let a = 0; a < TWO_PI; a += PI / 12) {
+    let r = faceWidth * 0.9;
+    let x = faceCenterX + cos(a) * r;
+    let y = faceCenterY + sin(a) * r;
+    fill(255, 180, 0, 200);
+    ellipse(x, y, 40, 40);
+  }
+
+  // Eyes
+  fill(255);
+  ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth * 1.2, leftEyeHeight * 1.2);
+  ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth * 1.2, rightEyeHeight * 1.2);
+
+  fill(50, 50, 0);
+  ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth * 0.4, leftEyeHeight * 0.4);
+  ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth * 0.4, rightEyeHeight * 0.4);
+
+  // Eyebrows
+  stroke(80, 60, 0);
+  strokeWeight(3);
+  noFill();
+  arc(leftEyebrowCenterX, leftEyebrowCenterY, leftEyebrowWidth, leftEyebrowHeight, PI, TWO_PI);
+  arc(rightEyebrowCenterX, rightEyebrowCenterY, rightEyebrowWidth, rightEyebrowHeight, PI, TWO_PI);
+  noStroke();
+
+  // Mouth
+  fill(255, 100, 50);
+  ellipse(lipsCenterX, lipsCenterY, lipsWidth, lipsHeight * 0.6);
 }
