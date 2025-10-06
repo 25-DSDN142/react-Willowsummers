@@ -1,11 +1,15 @@
 // ----=  Faces  =----
 /* load images here */
 let bgImage;
-
+let bgImageSun;
+let bgImageMoon;
+let tintCounter = 1;
 function prepareInteraction() {
 
   bgImage = loadImage('/images/background.png');
 
+  bgImageSun = loadImage('/images/bgSun.jpg');
+  bgImageMoon = loadImage('/images/bgMoon.jpg');
 }
 let isMouthOpen = false;
 function drawInteraction(faces, hands) {
@@ -82,10 +86,17 @@ function drawInteraction(faces, hands) {
 //drawFlower(face.keypoints[152].x,face.keypoints[152].y);
 
 
-image(bgImage, 0, 0)
+
+
 
 // Decide which face to draw based on mouth openness
 checkIfMouthOpen(face);   // updates isMouthOpen
+
+if (isMouthOpen) {
+  image(bgImageSun, 0, 0, 1280, 960 );
+} else {
+image(bgImageMoon, 0, 0, 1280, 960);
+}
 
 if (isMouthOpen) {
   drawSunFace(face);
