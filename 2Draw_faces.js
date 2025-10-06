@@ -1,7 +1,11 @@
 // ----=  Faces  =----
 /* load images here */
+let bgImage;
+
 function prepareInteraction() {
-  //bgImage = loadImage('/images/background.png');
+
+  bgImage = loadImage('/images/background.png');
+
 }
 let isMouthOpen = false;
 function drawInteraction(faces, hands) {
@@ -78,7 +82,7 @@ function drawInteraction(faces, hands) {
 //drawFlower(face.keypoints[152].x,face.keypoints[152].y);
 
 
-
+image(bgImage, 0, 0)
 
 // Decide which face to draw based on mouth openness
 checkIfMouthOpen(face);   // updates isMouthOpen
@@ -262,7 +266,7 @@ function checkIfMouthOpen(face) {
   let lipsHeight = face.lips.height;
   let lipsWidth = face.lips.width;
 
-  // Heuristic: if mouth height is more than ~30% of its width, call it open
+  // Heuristic: if mouth height is more than ~45% of its width, call it open
   if (lipsHeight / lipsWidth > 0.45) {
     isMouthOpen = true;
   } else {
