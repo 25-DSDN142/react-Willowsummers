@@ -65,10 +65,6 @@ function drawInteraction(faces, hands) {
 //drawPoints(face.rightEyebrow);
 
 
-drawFlower(face.leftEye.centerX, face.leftEye.centerY, )
-
-drawFlower(face.rightEye.centerX, face.rightEye.centerY, 30)
-
 
 
    // drawX(rightEyeCenterX,rightEyeCenterY);
@@ -81,14 +77,17 @@ drawFlower(face.rightEye.centerX, face.rightEye.centerY, 30)
 //circle(face.keypoints[4].x, face.keypoints[4].y, 30)
 //drawFlower(face.keypoints[152].x,face.keypoints[152].y);
 
-drawMoonFace()
 
-drawSunFace()
 
-   // checkIfMouthOpen(face);
- //   if (isMouthOpen) {
-  //    text("blah blah", face.keypoints[287].x, face.keypoints[287].y)
-  //  }
+
+// Decide which face to draw based on mouth openness
+checkIfMouthOpen(face);   // updates isMouthOpen
+
+if (isMouthOpen) {
+  drawSunFace(face);
+} else {
+  drawMoonFace(face);
+}
 
 
 
@@ -100,37 +99,6 @@ drawSunFace()
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
 }
-
-function drawX(X, Y) {
-  push()
-
-  stroke(255)
-  strokeWeight(15)
-  line(X - 20, Y - 20, X + 20, Y + 20)
-  line(X - 20, Y + 20, X + 20, Y - 20)
-
-  pop()
-}
-
-function drawFlower(X, Y) {
-  push();
-
-  // petals
-  fill('#FFB6C1'); // pink
-  noStroke();
-  ellipse(X - 20, Y, 30, 30);  // left petal
-  ellipse(X + 20, Y, 30, 30);  // right petal
-  ellipse(X, Y - 20, 30, 30);  // top petal
-  ellipse(X, Y + 20, 30, 30);  // bottom petal
-
-
-  // center
-  fill('#FFD700'); // yellow
-  ellipse(X, Y, 35, 35);
-
-  pop();
-}
-
 
 // This function draw's a dot on all the keypoints. It can be passed a whole face, or part of one. 
 function drawPoints(feature) {
@@ -147,6 +115,35 @@ function drawPoints(feature) {
 }
 
 function drawMoonFace(face) {
+
+  // Add the same variable declarations here
+  let faceCenterX = face.faceOval.centerX;
+  let faceCenterY = face.faceOval.centerY;
+  let faceWidth = face.faceOval.width;
+  let faceheight = face.faceOval.height;
+  let leftEyeCenterX = face.leftEye.centerX;
+  let leftEyeCenterY = face.leftEye.centerY;
+  let leftEyeWidth = face.leftEye.width;
+  let leftEyeHeight = face.leftEye.height;
+  let leftEyebrowCenterX = face.leftEyebrow.centerX;
+  let leftEyebrowCenterY = face.leftEyebrow.centerY;
+  let leftEyebrowWidth = face.leftEyebrow.width;
+  let leftEyebrowHeight = face.leftEyebrow.height;
+  let lipsCenterX = face.lips.centerX;
+  let lipsCenterY = face.lips.centerY;
+  let lipsWidth = face.lips.width;
+  let lipsHeight = face.lips.height;
+  let rightEyeCenterX = face.rightEye.centerX;
+  let rightEyeCenterY = face.rightEye.centerY;
+  let rightEyeWidth = face.rightEye.width;
+  let rightEyeHeight = face.rightEye.height;
+  let rightEyebrowCenterX = face.rightEyebrow.centerX;
+  let rightEyebrowCenterY = face.rightEyebrow.centerY;
+  let rightEyebrowWidth = face.rightEyebrow.width;
+  let rightEyebrowHeight = face.rightEyebrow.height;
+  
+  // ... rest of your drawing code
+
   // Base moon (ellipse around the face oval)
   fill(220);
   ellipse(faceCenterX, faceCenterY, faceWidth * 1.2, faceheight * 1.2);
@@ -183,19 +180,60 @@ function drawMoonFace(face) {
 }
 
 function drawSunFace(face) {
+
+  
+  // Add the same variable declarations here
+  let faceCenterX = face.faceOval.centerX;
+  let faceCenterY = face.faceOval.centerY;
+  let faceWidth = face.faceOval.width;
+  let faceHeight = face.faceOval.height;
+  let leftEyeCenterX = face.leftEye.centerX;
+  let leftEyeCenterY = face.leftEye.centerY;
+  let leftEyeWidth = face.leftEye.width;
+  let leftEyeHeight = face.leftEye.height;
+  let leftEyebrowCenterX = face.leftEyebrow.centerX;
+  let leftEyebrowCenterY = face.leftEyebrow.centerY;
+  let leftEyebrowWidth = face.leftEyebrow.width;
+  let leftEyebrowHeight = face.leftEyebrow.height;
+  let lipsCenterX = face.lips.centerX;
+  let lipsCenterY = face.lips.centerY;
+  let lipsWidth = face.lips.width;
+  let lipsHeight = face.lips.height;
+  let rightEyeCenterX = face.rightEye.centerX;
+  let rightEyeCenterY = face.rightEye.centerY;
+  let rightEyeWidth = face.rightEye.width;
+  let rightEyeHeight = face.rightEye.height;
+  let rightEyebrowCenterX = face.rightEyebrow.centerX;
+  let rightEyebrowCenterY = face.rightEyebrow.centerY;
+  let rightEyebrowWidth = face.rightEyebrow.width;
+  let rightEyebrowHeight = face.rightEyebrow.height;
+  
+  // ... rest of your drawing code
+
  
   // Sun body
   fill(255, 215, 0);
   ellipse(faceCenterX, faceCenterY, faceWidth * 1.3, faceHeight * 1.3);
 
-  // Rays
-  for (let a = 0; a < TWO_PI; a += PI / 12) {
-    let r = faceWidth * 0.9;
-    let x = faceCenterX + cos(a) * r;
-    let y = faceCenterY + sin(a) * r;
-    fill(255, 180, 0, 200);
-    ellipse(x, y, 40, 40);
-  }
+// Rays
+for (let a = 0; a < TWO_PI; a += PI / 12) {
+  let r = faceWidth * 0.9;
+  let innerX = faceCenterX + cos(a) * r;
+  let innerY = faceCenterY + sin(a) * r;
+
+  let tipX = faceCenterX + cos(a) * (r + 40);
+  let tipY = faceCenterY + sin(a) * (r + 40);
+
+  let leftX = faceCenterX + cos(a - 0.1) * r;
+  let leftY = faceCenterY + sin(a - 0.1) * r;
+
+  let rightX = faceCenterX + cos(a + 0.1) * r;
+  let rightY = faceCenterY + sin(a + 0.1) * r;
+
+  fill(255, 180, 0, 200);
+  noStroke();
+  triangle(leftX, leftY, rightX, rightY, tipX, tipY);
+}
 
   // Eyes
   fill(255);
@@ -217,4 +255,17 @@ function drawSunFace(face) {
   // Mouth
   fill(255, 100, 50);
   ellipse(lipsCenterX, lipsCenterY, lipsWidth, lipsHeight * 0.6);
+}
+
+function checkIfMouthOpen(face) {
+  // Lips bounding box from facemesh
+  let lipsHeight = face.lips.height;
+  let lipsWidth = face.lips.width;
+
+  // Heuristic: if mouth height is more than ~30% of its width, call it open
+  if (lipsHeight / lipsWidth > 0.45) {
+    isMouthOpen = true;
+  } else {
+    isMouthOpen = false;
+  }
 }
