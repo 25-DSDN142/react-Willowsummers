@@ -109,7 +109,7 @@ if (isMouthOpen) {
     */
 
 
-  }
+}
 }
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
