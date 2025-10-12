@@ -3,7 +3,7 @@
 let bgImage;
 let bgImageSun;
 let bgImageMoon;
-let tintCounter = 1;
+
 function prepareInteraction() {
 
   bgImage = loadImage('/images/background.png');
@@ -21,8 +21,7 @@ function drawInteraction(faces, hands) {
     if (showKeypoints) {
       drawPoints(face)
     }
-
-
+  
   
     // Face basics
     let faceCenterX = face.faceOval.centerX;
@@ -55,8 +54,6 @@ function drawInteraction(faces, hands) {
     let rightEyebrowWidth = face.rightEyebrow.width;
     let rightEyebrowHeight = face.rightEyebrow.height;
 
-    let noseTipX = face.keypoints[4].x;
-    let noseTipY = face.keypoints[4].y;
     /*
     Start drawing on the face here
     */
@@ -110,10 +107,13 @@ if (isMouthOpen) {
     /*
     Stop drawing on the face here
     */
+
+
   }
+}
   //------------------------------------------------------
   // You can make addtional elements here, but keep the face drawing inside the for loop. 
-}
+
 
 // This function draw's a dot on all the keypoints. It can be passed a whole face, or part of one. 
 function drawPoints(feature) {
@@ -223,9 +223,6 @@ function drawSunFace(face) {
   let rightEyebrowWidth = face.rightEyebrow.width;
   let rightEyebrowHeight = face.rightEyebrow.height;
   
-  // ... rest of your drawing code
-
- 
   // Sun body
   fill(255, 215, 0);
   ellipse(faceCenterX, faceCenterY, faceWidth * 1.3, faceHeight * 1.3);
