@@ -5,6 +5,7 @@ let bgImageSun;
 let bgImageMoon;
 let fadeAmount = 0; // 0 = moon, 1 = sun
 let fadeSpeed = 0.05; // how fast the transition happens
+let glowSpeed = 0.05; // how fast the glow pulses
 
 // Moon stars globals
 let moonStars = [];
@@ -117,7 +118,15 @@ function drawMoonFace(face) {
   let rightEyeWidth = face.rightEye.width;
   let rightEyeHeight = face.rightEye.height;
 
-  // Draw orbiting stars around the moon (draw BEFORE moon if you want stars behind)
+  // Glow
+let glowAlphaBase = map(sin(frameCount * glowSpeed), -1, 1, 40, 100);
+noStroke();
+for (let i = 2; i > 0; i--) {
+  fill(180, 200, 255, glowAlphaBase / (i * 1.3));
+  ellipse(faceCenterX, faceCenterY, faceWidth * (1.25 + i * 0.1), faceheight * (1.25 + i * 0.1));
+}
+
+  // Draw orbiting stars around the moon 
   push();
   noStroke();
   for (let i = 0; i < moonStars.length; i++) {
@@ -199,6 +208,14 @@ function drawSunFace(face) {
   let rightEyeCenterY = face.rightEye.centerY;
   let rightEyeWidth = face.rightEye.width;
   let rightEyeHeight = face.rightEye.height;
+
+  // Glow
+let glowAlphaBase = map(sin(frameCount * glowSpeed), -1, 1, 60, 130);
+noStroke();
+for (let i = 2; i > 0; i--) {
+  fill(255, 220, 0, glowAlphaBase / (i * 1.2));
+  ellipse(faceCenterX, faceCenterY, faceWidth * (1.35 + i * 0.1), faceHeight * (1.35 + i * 0.1));
+}
 
   // Sun body
   fill(255, 200, 0);
