@@ -1,5 +1,4 @@
 // ----=  Faces  =----
-/* load images here */
 let bgImage;
 let bgImageSun;
 let bgImageMoon;
@@ -19,13 +18,13 @@ function prepareInteraction() {
   initMoonStars(); // initialize star data
 }
 
-// init star data (radii will be recalculated per-face when drawing)
+// init star data 
 function initMoonStars() {
   moonStars = [];
   for (let i = 0; i < numMoonStars; i++) {
     moonStars.push({
       angle: random(0, TWO_PI),
-      radiusOffset: random(0.6, 1.6),   // will multiply by face width later
+      radiusOffset: random(0.6, 1.6),  
       speed: random(0.01, 0.02) * (random() < 0.5 ? 1 : -1),
       size: random(20, 30),
       phase: random(0, TWO_PI)
@@ -67,13 +66,11 @@ function drawInteraction(faces, hands) {
       drawPoints(face);
     }
 
-    // (You already calculate a bunch of face variables — keep those as you like)
-    // Example:
     let faceCenterX = face.faceOval.centerX;
     let faceCenterY = face.faceOval.centerY;
     let faceWidth = face.faceOval.width;
     let faceheight = face.faceOval.height;
-    // ... (other local vars you already have)
+    
 
     // Draw the correct face artwork
     if (isMouthOpen) {
@@ -126,7 +123,7 @@ for (let i = 2; i > 0; i--) {
   ellipse(faceCenterX, faceCenterY, faceWidth * (1.25 + i * 0.1), faceheight * (1.25 + i * 0.1));
 }
 
-  // Draw orbiting stars around the moon 
+  // orbiting stars around the moon 
   push();
   noStroke();
   for (let i = 0; i < moonStars.length; i++) {
@@ -143,7 +140,7 @@ for (let i = 2; i > 0; i--) {
     let sx = faceCenterX + cos(s.angle) * orbitR;
     let sy = faceCenterY + sin(s.angle) * orbitR;
 
-    // twinkle & wobble
+    // twinkle 
     let twinkle = map(sin(frameCount * 0.1 + s.phase), -1, 1, 0.6, 1.0);
     let starSize = s.size * twinkle;
 
@@ -151,22 +148,22 @@ for (let i = 2; i > 0; i--) {
     translate(sx, sy);
     rotate(frameCount * 0.002 * (i % 2 === 0 ? 1 : -1));
     fill(255, 245, 180, 220 * twinkle);
-    // simple cross-style star (fast)
+    // simple star
     ellipse(0, 0, starSize, starSize * 0.35);
     ellipse(0, 0, starSize * 0.35, starSize);
     pop();
   }
   pop();
 
-  // Base moon (ellipse around the face oval)
+  // Base moon 
   fill(220);
   ellipse(faceCenterX, faceCenterY, faceWidth * 1.2, faceheight * 1.2);
 
-  // Shading (simple overlay offset to one side)
+  // Shading 
   fill(180, 180, 190, 60);
   ellipse(faceCenterX - faceWidth * 0.1, faceCenterY - faceheight * 0.05, faceWidth, faceheight);
 
-  // Eyes / eyebrows / mouth (your original drawing)
+  // Eyes 
   fill(255); // white of the eye
   ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth * 1.2, leftEyeHeight * 1.2);
   fill(80); // pupil
@@ -221,7 +218,7 @@ for (let i = 2; i > 0; i--) {
   fill(255, 200, 0);
   ellipse(faceCenterX, faceCenterY, faceWidth * 1.3, faceHeight * 1.3);
 
-  // Wavy rays (your existing code kept)
+  // Wavy rays 
   let r = faceWidth * 0.9;
   let rayLength = faceWidth * 0.9;
   let waveAmp = faceWidth * 0.15;
@@ -252,7 +249,7 @@ for (let i = 2; i > 0; i--) {
     endShape(CLOSE);
   }
 
-  // Eyes, eyebrows, mouth (kept same as before)
+  // Eyes, eyebrows, mouth 
   fill(255);
   ellipse(leftEyeCenterX, leftEyeCenterY, leftEyeWidth * 1.2, leftEyeHeight * 1.2);
   ellipse(rightEyeCenterX, rightEyeCenterY, rightEyeWidth * 1.2, rightEyeHeight * 1.2);
